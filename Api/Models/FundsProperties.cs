@@ -1,8 +1,8 @@
-using System;
+﻿using System;
 
-namespace Api.DataFiles
+namespace Api.Common
 {
-    public class FundDetails
+    public class FundsProperties
     {
         public Guid Id { get; set; }
 
