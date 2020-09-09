@@ -3,37 +3,62 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
-    using System.IO;
     using Api.DataFiles;
+    using Microsoft.AspNetCore.Http;
+    using System.Text.RegularExpressions;
 
     public class FundsController : Controller
     {
-        [Route("get-funds")]
-        public IActionResult GetFunds(string id)
+
+        [HttpGet("get-funds/{code?}")]
+        public IActionResult GetFunds([FromRoute] string code = null)
         {
+            if (code != null && !Regex.IsMatch(code, "^[a-zA-Z ]*$"))
+            {
+                return new StatusCodeResult(StatusCodes.Status400BadRequest);
+            }
             var file = System.IO.File.ReadAllTextAsync("./DataFiles/funds.json").Result;
 
             var funds = JsonConvert.DeserializeObject<List<FundDetails>>(file);
 
-            if (id != null)
+            if (code != null)
             {
-                return this.Ok(funds.Single(x => x.MarketCode == id));
+                try
+                {
+                    return this.Ok(new Fund(funds.Single(x => x.MarketCode == code)));
+                }
+                catch (InvalidOperationException)
+                {
+                    return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+                }
             }
-            
-            return this.Ok(funds);
+
+            List<Fund> fundResults = new List<Fund>();
+            foreach (FundDetails f in funds)
+            {
+                fundResults.Add(new Fund(f));
+            }
+            return this.Ok(fundResults);
         }
 
-        [Route("get-managerfunds")]
-        public IActionResult GetManagerFunds(string manager)
+        [HttpGet("get-managerfunds/{manager}")]
+        public IActionResult GetManagerFunds([FromRoute] string manager)
         {
+            if (manager == null || !Regex.IsMatch(manager, "^[a-zA-Z ]*$")) return new StatusCodeResult(StatusCodes.Status400BadRequest);
+
             var file = System.IO.File.ReadAllTextAsync("./DataFiles/funds.json").Result;
 
             var funds = JsonConvert.DeserializeObject<List<FundDetails>>(file);
 
-            return this.Ok(funds.Where(x => x.Name == manager));
+            List<Fund> fundResults = new List<Fund>();
+            foreach (FundDetails f in funds)
+            {
+                fundResults.Add(new Fund(f));
+            }
+
+            return this.Ok(fundResults.Where(x => x.FundManager == manager));
         }
 
     }
