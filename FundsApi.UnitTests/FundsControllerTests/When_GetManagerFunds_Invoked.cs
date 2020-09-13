@@ -23,8 +23,8 @@ namespace FundsApi.UnitTests.FundsControllerTests
         [Test]
         public void Then_Result_Should_Be_Expected_Name()
         {
-            var value = _result.Value as List<FundDetails>;
-            value.All(x => x.Name == ExpectedFundManager).ShouldBeTrue();
+            var value = _result.Value as IEnumerable<FundDetails>;
+            value.ToList().All(x => x.Name == ExpectedFundManager).ShouldBeTrue();
         }
     }
 }
