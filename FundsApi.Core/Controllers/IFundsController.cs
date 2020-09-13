@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using FundsApi.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FundsApi.Core.Controllers
@@ -9,5 +10,7 @@ namespace FundsApi.Core.Controllers
     {
         IActionResult GetFunds(string id);
         IActionResult GetManagerFunds(string manager);
+
+        IActionResult GetFundByCode(string code);
     }
 }

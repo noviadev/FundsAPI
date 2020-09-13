@@ -1,4 +1,5 @@
 ﻿using FundsApi.Core.Controllers;
+using FundsApi.Core.Entities;
 
 namespace Api.Controllers
 {
@@ -38,5 +39,10 @@ namespace Api.Controllers
             return this.Ok(funds.Where(x => x.Name == manager)); //API is fund manager but searches by name
         }
 
+        [HttpGet("fund/{code}")]
+        public IActionResult GetFundByCode(string code)
+        {
+            return null;
+        }
     }
 }
