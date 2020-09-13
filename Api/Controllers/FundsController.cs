@@ -1,5 +1,6 @@
 ﻿using FundsApi.Core.Controllers;
 using FundsApi.Core.Entities;
+using FundsApi.Core.Services;
 
 namespace Api.Controllers
 {
@@ -14,6 +15,14 @@ namespace Api.Controllers
 
     public class FundsController : Controller, IFundsController
     {
+        private readonly IFundByMarketCodeGetter _fundByMarketCodeGetter;
+
+        public FundsController(
+            IFundByMarketCodeGetter fundByMarketCodeGetter)
+        {
+            _fundByMarketCodeGetter = fundByMarketCodeGetter ?? throw new ArgumentNullException(nameof(fundByMarketCodeGetter));
+        }
+
         [Route("get-funds")]
         public IActionResult GetFunds(string id)
         {
@@ -42,7 +51,13 @@ namespace Api.Controllers
         [HttpGet("fund/{code}")]
         public IActionResult GetFundByCode(string code)
         {
-            return null;
+            var fund = _fundByMarketCodeGetter.GetFund(code);
+            if (fund is null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(fund);
         }
     }
 }

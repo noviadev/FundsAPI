@@ -15,9 +15,10 @@ namespace FundsApi.UnitTests.FundsControllerTests
 
         public override void SetContext()
         {
-            Substitute.For<IFundByMarketCodeGetter>();
+            MockFundByMarketCodeGetter = Substitute.For<IFundByMarketCodeGetter>();
 
-            SUT = new FundsController();
+            SUT = new FundsController(
+                MockFundByMarketCodeGetter );
         }
     }
 }
