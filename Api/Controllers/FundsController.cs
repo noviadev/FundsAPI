@@ -1,4 +1,6 @@
-﻿namespace Api.Controllers
+﻿using FundsApi.Core.Controllers;
+
+namespace Api.Controllers
 {
     using System;
     using System.Collections.Generic;
@@ -9,7 +11,7 @@
     using System.IO;
     using Api.DataFiles;
 
-    public class FundsController : Controller
+    public class FundsController : Controller, IFundsController
     {
         [Route("get-funds")]
         public IActionResult GetFunds(string id)
@@ -20,7 +22,7 @@
 
             if (id != null)
             {
-                return this.Ok(funds.Single(x => x.MarketCode == id));
+                return this.Ok(funds.Single(x => x.MarketCode == id)); //API is Id but searches by MarketCode
             }
             
             return this.Ok(funds);
@@ -33,7 +35,7 @@
 
             var funds = JsonConvert.DeserializeObject<List<FundDetails>>(file);
 
-            return this.Ok(funds.Where(x => x.Name == manager));
+            return this.Ok(funds.Where(x => x.Name == manager)); //API is fund manager but searches by name
         }
 
     }
