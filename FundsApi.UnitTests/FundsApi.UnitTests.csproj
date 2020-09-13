@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Api\Api.csproj" />
+    <ProjectReference Include="..\FundsApi.BusinessLogic.Common\FundsApi.BusinessLogic.Common.csproj" />
     <ProjectReference Include="..\FundsApi.Core\FundsApi.Core.csproj" />
   </ItemGroup>
 

@@ -2,5 +2,6 @@
 {
     public interface IFundDetailsEntity
     {
+        string Code { get; set; }
     }
 }

@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{4
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundsApi.UnitTests", "FundsApi.UnitTests\FundsApi.UnitTests.csproj", "{860BF57E-6885-48DA-B6D2-B477C5A78A44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundsApi.Core", "FundsApi.Core\FundsApi.Core.csproj", "{4A9D4148-0444-492C-91E0-D36FE560E944}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FundsApi.Core", "FundsApi.Core\FundsApi.Core.csproj", "{4A9D4148-0444-492C-91E0-D36FE560E944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FundsApi.BusinessLogic.Common", "FundsApi.BusinessLogic.Common\FundsApi.BusinessLogic.Common.csproj", "{2491E803-098F-49CE-9A0A-2662602E7B02}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{4A9D4148-0444-492C-91E0-D36FE560E944}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A9D4148-0444-492C-91E0-D36FE560E944}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A9D4148-0444-492C-91E0-D36FE560E944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2491E803-098F-49CE-9A0A-2662602E7B02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2491E803-098F-49CE-9A0A-2662602E7B02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2491E803-098F-49CE-9A0A-2662602E7B02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2491E803-098F-49CE-9A0A-2662602E7B02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
