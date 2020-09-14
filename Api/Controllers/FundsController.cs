@@ -1,5 +1,6 @@
 ﻿using FundsApi.Core.Controllers;
 using FundsApi.Core.Entities;
+using FundsApi.Core.Entities.Interfaces;
 using FundsApi.Core.Services;
 
 namespace Api.Controllers
@@ -15,11 +16,14 @@ namespace Api.Controllers
     public class FundsController : Controller, IFundsController
     {
         private readonly IFundByMarketCodeGetter _fundByMarketCodeGetter;
+        private readonly IFundAllGetter _fundAllGetter;
 
         public FundsController(
-            IFundByMarketCodeGetter fundByMarketCodeGetter)
+            IFundByMarketCodeGetter fundByMarketCodeGetter, 
+            IFundAllGetter fundAllGetter)
         {
             _fundByMarketCodeGetter = fundByMarketCodeGetter ?? throw new ArgumentNullException(nameof(fundByMarketCodeGetter));
+            _fundAllGetter = fundAllGetter ?? throw new ArgumentNullException(nameof(fundAllGetter));
         }
 
         [Route("get-funds")]
@@ -57,6 +61,14 @@ namespace Api.Controllers
             }
 
             return this.Ok(fund);
+        }
+
+        [HttpGet("funds")]
+        public IActionResult GetAllFunds()
+        {
+            var funds = _fundAllGetter.GetAll();
+
+            return this.Ok(funds);
         }
     }
 }

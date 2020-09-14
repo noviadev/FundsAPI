@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using Api.Controllers;
 using FundsApi.Core.Controllers;
@@ -12,13 +11,16 @@ namespace FundsApi.UnitTests.FundsControllerTests
     {
 
         protected IFundByMarketCodeGetter MockFundByMarketCodeGetter;
+        protected IFundAllGetter MockFundAllGetter;
 
         public override void SetContext()
         {
             MockFundByMarketCodeGetter = Substitute.For<IFundByMarketCodeGetter>();
+            MockFundAllGetter = Substitute.For<IFundAllGetter>();
 
             SUT = new FundsController(
-                MockFundByMarketCodeGetter );
+                MockFundByMarketCodeGetter,
+                MockFundAllGetter );
         }
     }
 }
