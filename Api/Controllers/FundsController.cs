@@ -1,4 +1,5 @@
-﻿using FundsApi.Core.Controllers;
+﻿using Audit.Mvc;
+using FundsApi.Core.Controllers;
 using FundsApi.Core.Entities;
 using FundsApi.Core.Entities.Interfaces;
 using FundsApi.Core.Services;
@@ -30,6 +31,7 @@ namespace Api.Controllers
         }
 
         [Route("get-funds")]
+        [Audit]
         public IActionResult GetFunds(string id)
         {
             var file = System.IO.File.ReadAllTextAsync("./DataFiles/funds.json").Result;
@@ -45,6 +47,7 @@ namespace Api.Controllers
         }
 
         [Route("get-managerfunds")]
+        [Audit]
         public IActionResult GetManagerFunds(string manager)
         {
             var file = System.IO.File.ReadAllTextAsync("./DataFiles/funds.json").Result;
@@ -55,6 +58,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("fund/code/{code}")]
+        [Audit]
         public IActionResult GetFundByCode(string code)
         {
             var fund = _fundByMarketCodeGetter.GetFund(code);
@@ -67,6 +71,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("funds")]
+        [Audit]
         public IActionResult GetAllFunds()
         {
             var funds = _fundAllGetter.GetAll();
@@ -75,6 +80,7 @@ namespace Api.Controllers
         }
 
         [HttpGet("funds/fundmanager/{fundManager}")]
+        [Audit]
         public IActionResult GetFundByFundManager(string fundManager)
         {
             var funds = _fundsByFundManagerGetter.GetFunds(fundManager);

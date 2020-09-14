@@ -29,6 +29,10 @@ namespace Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Audit.Core.Configuration.Setup()
+                .UseFileLogProvider(_ => _
+                    .Directory(@"C:\Logs"));
+
             services.AddMvc();
             services.AddTransient<IFundByMarketCodeGetter, FundByMarketCodeGetterService>();
             services.AddTransient<IFundDetailsEntityLoader, FundDetailsEntityLoaderService>();
