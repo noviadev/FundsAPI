@@ -14,5 +14,6 @@ namespace FundsApi.Core.Controllers
 
         IActionResult GetFundByCode(string code);
         IActionResult GetAllFunds();
+        IActionResult GetFundByFundManager(string fundManager);
     }
 }

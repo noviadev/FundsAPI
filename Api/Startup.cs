@@ -34,6 +34,8 @@ namespace Api
             services.AddTransient<IFundDetailsEntityLoader, FundDetailsEntityLoaderService>();
             services.AddTransient<IFundDetailsToFundDetailsEntityTransformer, FundDetailsToFundDetailsEntityTransformer>();
             services.AddTransient<IFundDetailsRepository, FundDetailsRepository>();
+            services.AddTransient<IFundAllGetter, FundAllGetterService>();
+            services.AddTransient<IFundsByFundManagerGetter, FundsByFundManagerGetterService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

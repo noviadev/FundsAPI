@@ -17,13 +17,16 @@ namespace Api.Controllers
     {
         private readonly IFundByMarketCodeGetter _fundByMarketCodeGetter;
         private readonly IFundAllGetter _fundAllGetter;
+        private readonly IFundsByFundManagerGetter _fundsByFundManagerGetter;
 
         public FundsController(
             IFundByMarketCodeGetter fundByMarketCodeGetter, 
-            IFundAllGetter fundAllGetter)
+            IFundAllGetter fundAllGetter,
+            IFundsByFundManagerGetter fundsByFundManagerGetter)
         {
             _fundByMarketCodeGetter = fundByMarketCodeGetter ?? throw new ArgumentNullException(nameof(fundByMarketCodeGetter));
             _fundAllGetter = fundAllGetter ?? throw new ArgumentNullException(nameof(fundAllGetter));
+            _fundsByFundManagerGetter = fundsByFundManagerGetter ?? throw new ArgumentNullException(nameof(fundsByFundManagerGetter));
         }
 
         [Route("get-funds")]
@@ -68,6 +71,13 @@ namespace Api.Controllers
         {
             var funds = _fundAllGetter.GetAll();
 
+            return this.Ok(funds);
+        }
+
+        [HttpGet("funds/fundmanager/{fundManager}")]
+        public IActionResult GetFundByFundManager(string fundManager)
+        {
+            var funds = _fundsByFundManagerGetter.GetFunds(fundManager);
             return this.Ok(funds);
         }
     }
