@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Api.DataFiles;
+using FundsApi.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using Shouldly;

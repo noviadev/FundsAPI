@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using FundsApi.Core.Entities;
+using FundsApi.Core.Entities.Interfaces;
 using NSubstitute;
 using NUnit.Framework;
 using Shouldly;

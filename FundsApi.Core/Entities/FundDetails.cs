@@ -1,6 +1,6 @@
 using System;
 
-namespace Api.DataFiles
+namespace FundsApi.Core.Entities
 {
     public class FundDetails
     {

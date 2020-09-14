@@ -1,4 +1,5 @@
 ﻿using FundsApi.Core.Entities;
+using FundsApi.Core.Entities.Interfaces;
 
 namespace FundsApi.Core.Services
 {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using FundsApi.Core.Controllers;
 using FundsApi.Core.Entities;
+using FundsApi.Core.Entities.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using NSubstitute;
 using NUnit.Framework;

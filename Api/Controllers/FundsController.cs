@@ -11,7 +11,6 @@ namespace Api.Controllers
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
     using System.IO;
-    using Api.DataFiles;
 
     public class FundsController : Controller, IFundsController
     {
@@ -48,7 +47,7 @@ namespace Api.Controllers
             return this.Ok(funds.Where(x => x.Name == manager)); //API is fund manager but searches by name
         }
 
-        [HttpGet("fund/{code}")]
+        [HttpGet("fund/code/{code}")]
         public IActionResult GetFundByCode(string code)
         {
             var fund = _fundByMarketCodeGetter.GetFund(code);

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using FundsApi.Core.Entities;
+using FundsApi.Core.Entities.Interfaces;
 using FundsApi.Core.Services;
 
 namespace FundsApi.BusinessLogic.Common.Services
