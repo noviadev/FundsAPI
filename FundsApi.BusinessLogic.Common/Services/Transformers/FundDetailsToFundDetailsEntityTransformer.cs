@@ -26,7 +26,7 @@ namespace FundsApi.BusinessLogic.Common.Services.Transformers
                 Name = source.Name,
                 Active = source.Active,
                 Code = source.MarketCode,
-                CurrentUnitPrice = Decimal.Round(source.CurrentUnitPrice),
+                CurrentUnitPrice = Decimal.Round(source.CurrentUnitPrice, 2),
                 FundManager = source.FundManager
             };
         }

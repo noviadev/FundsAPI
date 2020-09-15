@@ -75,7 +75,7 @@ namespace FundsApi.UnitTests.FundDetailsToFundDetailsEntityTransformerTests
         [Test]
         public void Then_Result_First_CurrentUnitPrice_Should_Be_Expected_To_Two_Decimal_Places()
         {
-            _firstResult.CurrentUnitPrice.ShouldBe(Decimal.Round(ExpectedPrice));
+            _firstResult.CurrentUnitPrice.ShouldBe(Decimal.Round(ExpectedPrice, 2));
         }
     }
 }
