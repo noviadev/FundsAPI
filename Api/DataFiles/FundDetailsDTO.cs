@@ -1,7 +1,11 @@
+﻿using System;
+
 namespace Api.DataFiles
 {
-    public class FundDetails
+    public class FundDetailsDTO
     {
+        public Guid Id { get; set; }
+
         public bool Active { get; set; }
 
         public decimal CurrentUnitPrice { get; set; }
@@ -10,6 +14,6 @@ namespace Api.DataFiles
 
         public string Name { get; set; }
 
-        public string Code { get; set; }
+        public string MarketCode { get; set; }
     }
 }

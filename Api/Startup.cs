@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Unity;
 
 namespace Api
 {
@@ -22,6 +23,13 @@ namespace Api
 
         public IConfiguration Configuration { get; }
 
+        // Configure Unity container
+        public void ConfigureContainer(IUnityContainer container)
+        {
+            // Regsiter
+            IOC.RegisterElements(container);
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -29,7 +37,7 @@ namespace Api
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -37,6 +45,9 @@ namespace Api
             }
 
             app.UseMvc();
+
+            // Enable log4net
+            loggerFactory.AddLog4Net();
         }
     }
 }

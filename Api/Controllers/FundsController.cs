@@ -1,40 +1,39 @@
 ﻿namespace Api.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
+    using System.Collections.Generic;
     using Microsoft.AspNetCore.Mvc;
-    using Newtonsoft.Json;
-    using System.IO;
     using Api.DataFiles;
+    using Api.Interfaces;
 
     public class FundsController : Controller
     {
-        [Route("get-funds")]
-        public IActionResult GetFunds(string id)
+        private readonly IFundsHelper fundsHelper;
+
+        public FundsController(IFundsHelper _fundsHelper)
         {
-            var file = System.IO.File.ReadAllTextAsync("./DataFiles/funds.json").Result;
-
-            var funds = JsonConvert.DeserializeObject<List<FundDetails>>(file);
-
-            if (id != null)
-            {
-                return this.Ok(funds.Single(x => x.MarketCode == id));
-            }
-            
-            return this.Ok(funds);
+            fundsHelper = _fundsHelper;
         }
 
-        [Route("get-managerfunds")]
+        [HttpGet("funds")]
+        public IActionResult GetFunds()
+        {
+            List<FundDetails> funds = fundsHelper.GetFunds();
+            return Ok(funds);
+        }
+
+        [HttpGet("fund/{marketCode}")]
+        public IActionResult GetFundByMarketCode(string marketCode)
+        {
+            FundDetails fund = fundsHelper.GetFundByMarketCode(marketCode);
+            return Ok(fund);
+        }
+
+        [HttpGet("managerfunds/{manager}")]
         public IActionResult GetManagerFunds(string manager)
         {
-            var file = System.IO.File.ReadAllTextAsync("./DataFiles/funds.json").Result;
-
-            var funds = JsonConvert.DeserializeObject<List<FundDetails>>(file);
-
-            return this.Ok(funds.Where(x => x.Name == manager));
+            var funds = fundsHelper.GetFundsByFundManager(manager);
+            return Ok(funds.Where(x => x.Name == manager));
         }
-
     }
 }
