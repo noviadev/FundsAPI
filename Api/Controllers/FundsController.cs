@@ -1,17 +1,23 @@
 ﻿namespace Api.Controllers
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Threading.Tasks;
     using Microsoft.AspNetCore.Mvc;
     using Newtonsoft.Json;
-    using System.IO;
     using Api.DataFiles;
+    using Api.Models;
+    using Microsoft.Extensions.Logging;
 
+    [Route("/funds")]
     public class FundsController : Controller
     {
-        [Route("get-funds")]
+        private readonly ILogger _logger;
+        public FundsController(ILogger<FundsController> logger)
+        {
+            _logger = logger;
+        }
+
+        [HttpGet("get-funds")]
         public IActionResult GetFunds(string id)
         {
             var file = System.IO.File.ReadAllTextAsync("./DataFiles/funds.json").Result;
@@ -20,21 +26,46 @@
 
             if (id != null)
             {
-                return this.Ok(funds.Single(x => x.MarketCode == id));
+                var fundsToProcess = funds.Where(f => f.MarketCode == id);
+
+                _logger.LogInformation($"Fund with MarketCode {id} accessed");
+                return this.Ok(GetPublicDto(fundsToProcess));
             }
-            
-            return this.Ok(funds);
+
+            _logger.LogInformation($"Funds with MarketCode {id} accessed");
+            return this.Ok(GetPublicDto(funds));
         }
 
-        [Route("get-managerfunds")]
+        [HttpGet("get-managerfunds/{manager}")]
         public IActionResult GetManagerFunds(string manager)
         {
             var file = System.IO.File.ReadAllTextAsync("./DataFiles/funds.json").Result;
 
-            var funds = JsonConvert.DeserializeObject<List<FundDetails>>(file);
+            var funds = JsonConvert
+                .DeserializeObject<List<FundDetails>>(file)
+                .Where(x => x.Name == manager);
 
-            return this.Ok(funds.Where(x => x.Name == manager));
+            _logger.LogInformation($"Funds for Manager {manager} accessed");
+            return this.Ok(GetPublicDto(funds));
         }
 
+        public static List<FundDetailsDto> GetPublicDto(IEnumerable<FundDetails> funds)
+        {
+            var publicFunds = new List<FundDetailsDto>();
+
+            foreach (var fund in funds)
+            {
+                publicFunds.Add(new FundDetailsDto
+                {
+                    Active = fund.Active,
+                    CurrentUnitPrice = decimal.Round(fund.CurrentUnitPrice, 2),
+                    FundManager = fund.FundManager,
+                    Name = fund.Name,
+                    Code = fund.MarketCode
+                });
+            }
+
+            return publicFunds;
+        }
     }
 }
