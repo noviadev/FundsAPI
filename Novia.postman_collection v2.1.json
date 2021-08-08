@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "5c11eb95-e8f9-4e62-8849-2f2ea7383c5c",
+		"name": "Novia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "get-funds",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:59754/get-funds/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "59754",
+					"path": [
+						"get-funds",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-funds OCCAECAT",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:59754/get-funds/?id=OCCAECAT",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "59754",
+					"path": [
+						"get-funds",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "OCCAECAT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-funds invalidID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:59754/get-funds/?id=invalidID",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "59754",
+					"path": [
+						"get-funds",
+						""
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "invalidID"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-managerfunds Comtract",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:59754/get-managerfunds?manager=Comtract",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "59754",
+					"path": [
+						"get-managerfunds"
+					],
+					"query": [
+						{
+							"key": "manager",
+							"value": "Comtract"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-managerfunds invalidManager",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:59754/get-managerfunds?manager=invalidManager",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "59754",
+					"path": [
+						"get-managerfunds"
+					],
+					"query": [
+						{
+							"key": "manager",
+							"value": "invalidManager"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
